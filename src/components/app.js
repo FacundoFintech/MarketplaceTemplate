@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Router, Location, Redirect } from '@reach/router';
 import ScrollToTopBtn from './menu/ScrollToTop';
 import Header from './menu/header';
@@ -77,6 +77,8 @@ export const ScrollTop = ({ children, location }) => {
   React.useEffect(() => window.scrollTo(0,0), [location])
   return children
 }
+
+
 
 const PosedRouter = ({ children }) => (
   <Location>

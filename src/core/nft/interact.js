@@ -2,7 +2,7 @@ import { pinJSONToIPFS } from "./pinata.js";
 require("dotenv").config();
 const alchemyKey = process.env.REACT_APP_ALCHEMY_KEY;
 const contractABI = require("./contract-abi.json");
-const contractAddress = "0xb81A3396c198C7f69e44Ab3e0c9f963773336E09";
+const contractAddress = "0xD5B614dA8ea68A5462F59CEbf17989C27d8868Fd";
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 const web3 = createAlchemyWeb3(alchemyKey);
 
@@ -84,8 +84,8 @@ export const getCurrentWalletConnected = async () => {
   }
 };
 
-export const mintNFT = async (url, name, description) => {
-  if (url.trim() === "" || name.trim() === "" || description.trim() === "") {
+export const mintNFT = async (fileUrl, name, description) => {
+  if (fileUrl.trim() === "" || name.trim() === "" || description.trim() === "") {
     return {
       success: false,
       status: "Please make sure all fields are completed before minting.",
@@ -95,8 +95,9 @@ export const mintNFT = async (url, name, description) => {
   //make metadata
   const metadata = {};
   metadata.name = name;
-  metadata.image = url;
+  metadata.image = fileUrl;
   metadata.description = description;
+  console.log("metadata imagen",metadata.image)
 
   const pinataResponse = await pinJSONToIPFS(metadata);
   if (!pinataResponse.success) {
@@ -124,9 +125,16 @@ export const mintNFT = async (url, name, description) => {
     });
     return {
       success: true,
-      status:
-        "Check out your transaction on Etherscan: https://ropsten.etherscan.io/tx/" +
-        txHash,
+      status: (
+        <>
+          <p>Check out your transaction on Etherscan: </p> 
+          <a target="_blank" rel="noreferrer" href={`https://ropsten.etherscan.io/tx/${txHash}`}>
+                <p>https://ropsten.etherscan.io/tx/{txHash}</p>
+          </a>
+        </>
+      )
+        // "Check out your transaction on Etherscan: https://ropsten.etherscan.io/tx/" +
+        // txHash,
     };
   } catch (error) {
     return {
