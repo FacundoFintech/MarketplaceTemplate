@@ -11,17 +11,20 @@ import './assets/style_grey.scss';
 import App from './components/app';
 import * as serviceWorker from './serviceWorker';
 import { MoralisProvider } from "react-moralis";
+import {BrowserRouter as Router} from "react-router-dom";
 
 //redux store
 import { Provider } from 'react-redux'
 import store from './store';
 
 ReactDOM.render(
-	<MoralisProvider appId="5v36LWYvPqx8wHgptLa3raAtu5H7jEhOn2pT2KDM" serverUrl="https://qwcbsktek0sc.usemoralis.com:2053/server">
-		<Provider store={store}>
-			<App />
-		</Provider>
-	</MoralisProvider>, 
+	<Router>
+		<MoralisProvider appId="5v36LWYvPqx8wHgptLa3raAtu5H7jEhOn2pT2KDM" serverUrl="https://qwcbsktek0sc.usemoralis.com:2053/server">
+			<Provider store={store}>
+				<App />
+			</Provider>
+		</MoralisProvider>
+	</Router>,
 	document.getElementById('root'));
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

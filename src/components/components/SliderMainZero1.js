@@ -22,7 +22,7 @@ const slidermainzero= () => (
               <div className="spacer-single"></div>
               <div className="spacer-double"></div>
               <Reveal className='onStep' keyframes={fadeInUp} delay={0} duration={600} triggerOnce>
-              <h6 className="text-center"><span className="text-uppercase color">Gigaland Market</span></h6>
+              <h6 className="text-center"><span className="text-uppercase color">NFT Market</span></h6>
               </Reveal>
               <div className="spacer-half"></div>
               <Reveal className='onStep' keyframes={fadeInUp} delay={300} duration={600}>

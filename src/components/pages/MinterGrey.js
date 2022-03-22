@@ -6,7 +6,7 @@ import {
 } from "../../core/nft/interact";
 // import { createGlobalStyle } from 'styled-components';
 import Moralis from 'moralis';
-import { useMoralis } from "react-moralis";
+import ImageHandler from './imageHandler'
 import ColumnNewMint from '../components/ColumnNewMint';
 import api from "../../core/api";
 import Footer from '../components/footer';
@@ -191,6 +191,7 @@ const Minter = (props) => {
                     <Form.Label>Large file input example</Form.Label>
                     <Form.Control onChange={onChange} type="file"/>
                   </Form.Group>
+                  <ImageHandler/>
                   <h2>Name: </h2>
                   <input
                     className="form-control"

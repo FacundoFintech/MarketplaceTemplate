@@ -5,6 +5,10 @@ import { Link } from '@reach/router';
 import useOnclickOutside from "react-cool-onclickoutside";
 import auth from '../../core/auth';
 import { navigate } from '@reach/router';
+import MinterFactory from '../../assets/Logos/MinterFactory.svg';
+import MinterFactoryWhite from '../../assets/Logos/MinterFactoryWhite.svg';
+import './header.css';
+import { useParams } from "react-router-dom";
 
 
 setDefaultBreakpoints([
@@ -29,6 +33,8 @@ const NavLink = props => (
 
 
 const Header = function({ className }) {
+  
+    let { idUrl } = useParams();
 
     const [openMenu, setOpenMenu] = React.useState(false);
     const [openMenu1, setOpenMenu1] = React.useState(false);
@@ -115,6 +121,8 @@ const Header = function({ className }) {
         window.removeEventListener("scroll", scrollCallBack);
       };
     }, []);
+
+    console.log(idUrl);
     return (
     <header className={`navbar white ${className}`} id="myHeader">
      <div className='container'>
@@ -123,23 +131,24 @@ const Header = function({ className }) {
               <div className='navbar-title navbar-item'>
                 <NavLink to="/">
                 <img
-                    src="/img/logo.png"
-                    className="img-fluid d-block"
+                    // {idUrl === 'minter' ? 'src={MinterFactory}' : 'src={MinterFactoryWhite}'}
+                    src={MinterFactory}
+                    className="img-fluid dapps-factory d-block"
                     alt="#"
                   />
                   <img
-                    src="/img/logo-2.png"
-                    className="img-fluid d-3"
+                    src={MinterFactory}
+                    className="img-fluid dapps-factory d-3"
                     alt="#"
                   />
                   <img
-                    src="/img/logo-3.png"
-                    className="img-fluid d-4"
+                    src={MinterFactory}
+                    className="img-fluid dapps-factory d-4"
                     alt="#"
                   />
                   <img
-                    src="/img/logo-light.png"
-                    className="img-fluid d-none"
+                    src={MinterFactory}
+                    className="img-fluid dapps-factory d-none"
                     alt="#"
                   />
                 </NavLink>
