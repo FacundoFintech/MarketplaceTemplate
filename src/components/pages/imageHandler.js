@@ -7,6 +7,7 @@ export class ImageHandler extends Component {
   }
   imageHandler = (e) => {
     const reader = new FileReader();
+    console.log('hola')
     reader.onload = () =>{
       if(reader.readyState === 2){
         this.setState({profileImg: reader.result})
@@ -33,7 +34,7 @@ export class ImageHandler extends Component {
 						<i className="material-icons">add_photo_alternate</i>
 						Choose your Photo
 					</label>
-                    </div>
+          </div>
 				</div>
 			</div>
 		);

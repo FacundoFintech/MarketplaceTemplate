@@ -19,7 +19,7 @@ import store from './store';
 
 ReactDOM.render(
 	<Router>
-		<MoralisProvider appId="5v36LWYvPqx8wHgptLa3raAtu5H7jEhOn2pT2KDM" serverUrl="https://qwcbsktek0sc.usemoralis.com:2053/server">
+		<MoralisProvider appId="Y8rjzykRblB8EGwhsfqm8ZUshtuaYtoZOsnyQVxe" serverUrl="https://3kkj3d8rkc6u.usemoralis.com:2053/server">
 			<Provider store={store}>
 				<App />
 			</Provider>

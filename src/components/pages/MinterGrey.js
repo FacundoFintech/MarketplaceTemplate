@@ -118,9 +118,9 @@ const Minter = (props) => {
     setDescription(nft.description);
     setURL(api.baseUrl + nft.preview_image.url);
   }
-
   const isEmpty = useCallback(() => {
     return fileUrl.trim() === '' || name.trim() === '' || description.trim() === '';
+    console.log(fileUrl, name, description);
   }, [fileUrl, name, description]);
 
   return (
@@ -216,7 +216,7 @@ const Minter = (props) => {
                   <button id="mintButton" className="btn-main" onClick={onMintPressed}>
                     Proceed to Mint
                   </button>
-                  <br />
+                  <br/>
                 </>
               }
               <p id="status">
