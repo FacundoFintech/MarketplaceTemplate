@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
-import Lightbox from "./components/CoolLightbox";
-import ImageMosaic from "./components/ImageMosaic";
-import images from "./images";
 import { useNFTBalances, useMoralis } from "react-moralis";
-import ImageGallery from './ImageGallery.css';
+import './ImageGallery.css';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 const ImageGallery = () => {
-  const [isOpen, setOpen] = useState(false);
-  const [currentImageIndex, setCurrentIndex] = useState();
+  // const [isOpen, setOpen] = useState(false);
+  // const [currentImageIndex, setCurrentIndex] = useState();
 
   const { getNFTBalances, data, isLoading } = useNFTBalances();
   const { user, isAuthenticated } = useMoralis();
@@ -55,30 +55,24 @@ const ImageGallery = () => {
   } else {
     return (
       <>
-        {/* r {}eact-photo-gallery */}
-        {/* <MapNftData/> */}
-        {data?.result.map((nft, index) => (
-         <div key={index}>
-           <img src={nft.image} alt="foto-nft" className="gallery-foto"/>
-           
+         <div className="justify-content-center">
+           <div className="p-4">
+            <Container>
+              <Row>
+                {data?.result.map((nft, index) => (
+                  <Col xs={6} md={4}>
+                    <div key={index} className="nft-container">
+                      <img src={nft.image} alt="foto-nft" className="gallery-foto overflow-hidden"/>
+                      <div className="p-1 bg-dark name-container">
+                        <p className="nft-name">{nft.name}</p>
+                      </div>
+                    </div>
+                  </Col>
+                ))}
+              </Row>
+            </Container>
+           </div>
          </div>
-        ))}
-        <ImageMosaic
-          containerHeight="100px"
-          alt="alt"
-          images={imagesNft}
-          handleClick={(e, { index }) => {
-            setCurrentIndex(index);
-            setOpen(true);
-          }}
-        />
-        <Lightbox
-          currentImageIndex={currentImageIndex}
-          setCurrentIndex={setCurrentIndex}
-          isOpen={isOpen}
-          onClose={() => setOpen(false)}
-          images={images}
-        />
       </>
     )
   }
