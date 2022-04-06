@@ -11,68 +11,81 @@ const ImageGallery = () => {
 
   const { getNFTBalances, data, isLoading } = useNFTBalances();
   const { user, isAuthenticated } = useMoralis();
-
-  const [imagesNft, setImagesNft] = useState([]);
-  const [loading, setLoading] = useState(true)
+  /* const [imagesNft, setImagesNft] = useState([]); */
+  /* const [loading, setLoading] = useState(false) */
+  const [address, setAddress] = useState("");
 
   // const [nftData, setNftData] = useContext(AppContext);
 
-  useEffect(() => {
-    getNFTBalances({ params: { address: "0x8D96037b23f011F95b4dD288240B6bEb6316f2C3", chain: "0x13881" } })
-    console.log("mi data: ", data)
-  }, [isLoading]);
 
-  const [address, setAddress] = useState();
   useEffect(() => {
+    //console.log("Efecto")
+    
+    if (!isLoading && user) {
+      console.log({ user, isAuthenticated, isLoading })
+      getNFTBalances({ params: { address: user.attributes.ethAddress, chain: "0x13881" } })
+    }
+    /* if(!isLoading && address){ */
+    /* getNFTBalances({ params: { address: address , chain: "0x13881" } }) */
+
+    /* } */
+  }, [isLoading, user/* ,address , user.attribues.ethAddress , user*/]);
+
+  /* useEffect(() => {
     if (isAuthenticated) {
       setAddress(user.attributes.ethAddress);
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated]); */
 
 
-  useEffect(() => {
+  /* useEffect(() => {
     data?.result.forEach((nft) => {
       const nextList = [...imagesNft];
       nextList.push(nft);
       setImagesNft(nextList)
     })
-  }, [data]);
+  }, [data]); */
 
-  useEffect(() => {
+  /* useEffect(() => {
     setLoading(true)
     setTimeout(() => {
       setLoading(false)
       console.log("mis imagenes nft 2! ", imagesNft)
     }, [1000])
-  }, [imagesNft])
+  }, [imagesNft]) */
 
-  console.log("array de NFTs: ",imagesNft)
+  /* console.log("array de NFTs: ",imagesNft) */
 
   // const MapNftData = () => {
   // }
-  if (loading) {
+  if (isLoading) {
     return <h1>Loading... </h1>
   } else {
     return (
       <>
-         <div className="justify-content-center">
-           <div className="p-4">
+        <div className="justify-content-center">
+          <div className="p-4">
             <Container>
               <Row>
-                {data?.result.map((nft, index) => (
-                  <Col xs={6} md={4}>
-                    <div key={index} className="nft-container">
-                      <img src={nft.image} alt="foto-nft" className="gallery-foto overflow-hidden"/>
-                      <div className="p-1 bg-dark name-container">
-                        <p className="nft-name">{nft.name}</p>
+                {data?.result.filter(nft=>nft.image).map((nft, index) => {
+                  //console.log(nft)
+                  return (
+                    <Col xs={6} md={4}>
+                      <div key={index} className="nft-container">
+                        <img src={nft.image} alt="foto-nft" className="gallery-foto overflow-hidden" />
+                        <div className="p-1 bg-dark name-container">
+                          <p className="nft-name">{nft.name}</p>
+                        </div>
                       </div>
-                    </div>
-                  </Col>
-                ))}
+                    </Col>
+                  )
+                }
+
+                )}
               </Row>
             </Container>
-           </div>
-         </div>
+          </div>
+        </div>
       </>
     )
   }
