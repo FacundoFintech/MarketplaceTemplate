@@ -187,10 +187,11 @@ const Minter = (props) => {
                     className='form-input'
                     id="filePicker" style={{ display: 'none' }}
                   /> */}
-                  <Form.Group controlId="formFileLg" className="mb-3">
+                  {/* <Form.Group controlId="formFileLg" className="mb-3">
                     <Form.Label>Large file input example</Form.Label>
                     <Form.Control onChange={onChange} type="file"/>
-                  </Form.Group>
+                  </Form.Group> */}
+                  <h2>Image: </h2>
                   <ImageHandler/>
                   <h2>Name: </h2>
                   <input
