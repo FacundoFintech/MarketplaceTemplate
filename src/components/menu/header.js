@@ -35,6 +35,7 @@ const NavLink = props => (
 const Header = function({ className }) {
   
     let { idUrl } = useParams();
+    const [logo, setLogo] = useState(MinterFactory);
 
     const [openMenu, setOpenMenu] = React.useState(false);
     const [openMenu1, setOpenMenu1] = React.useState(false);
@@ -122,7 +123,14 @@ const Header = function({ className }) {
       };
     }, []);
 
-    console.log(idUrl);
+    console.log("el id url: ", {idUrl});
+
+    useState(() => {
+      if(idUrl !== '/') {
+        setLogo(MinterFactoryWhite);
+      }
+    }, []);
+
     return (
     <header className={`navbar white ${className}`} id="myHeader">
      <div className='container'>
@@ -132,22 +140,22 @@ const Header = function({ className }) {
                 <NavLink to="/">
                 <img
                     // {idUrl === 'minter' ? 'src={MinterFactory}' : 'src={MinterFactoryWhite}'}
-                    src={MinterFactory}
+                    src={logo}
                     className="img-fluid dapps-factory d-block"
                     alt="#"
                   />
                   <img
-                    src={MinterFactory}
+                    src={logo}
                     className="img-fluid dapps-factory d-3"
                     alt="#"
                   />
                   <img
-                    src={MinterFactory}
+                    src={logo}
                     className="img-fluid dapps-factory d-4"
                     alt="#"
                   />
                   <img
-                    src={MinterFactory}
+                    src={logo}
                     className="img-fluid dapps-factory d-none"
                     alt="#"
                   />
