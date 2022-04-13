@@ -12,10 +12,12 @@ const ImageGallery = () => {
 
   useEffect(() => {
     if (!isLoading && user) {
+      console.log("probando balances!!")
       console.log({ user, isAuthenticated, isLoading })
       getNFTBalances({ params: { address: user.attributes.ethAddress, chain: "0x13881" } })
     }
   }, [isLoading, user/* ,address , user.attribues.ethAddress , user*/]);
+
 
   if (isLoading) {
     return <h1>Loading... </h1>
