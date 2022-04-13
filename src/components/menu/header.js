@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Breakpoint, { BreakpointProvider, setDefaultBreakpoints } from "react-socks";
-//import { header } from 'react-bootstrap';
 import { Link } from '@reach/router';
 import useOnclickOutside from "react-cool-onclickoutside";
 import auth from '../../core/auth';
 import { navigate } from '@reach/router';
-import MinterFactory from '../../assets/Logos/MinterFactory.svg';
-import MinterFactoryWhite from '../../assets/Logos/MinterFactoryWhite.svg';
+import MinterFactory from '../../assets/Logos/logoMinterGris.svg';
+// import logo from '../../assets/Logos/logoMinterGris.svg';
+// import MinterFactoryWhite from '../../assets/Logos/MinterFactoryWhite.svg';
 import './header.css';
 import { useParams } from "react-router-dom";
 
@@ -138,27 +138,39 @@ const Header = function({ className }) {
           <div className='logo px-0'>
               <div className='navbar-title navbar-item'>
                 <NavLink to="/">
-                <img
-                    // {idUrl === 'minter' ? 'src={MinterFactory}' : 'src={MinterFactoryWhite}'}
-                    src={logo}
-                    className="img-fluid dapps-factory d-block"
-                    alt="#"
-                  />
+
                   <img
-                    src={logo}
-                    className="img-fluid dapps-factory d-3"
-                    alt="#"
-                  />
-                  <img
-                    src={logo}
-                    className="img-fluid dapps-factory d-4"
-                    alt="#"
-                  />
-                  <img
-                    src={logo}
-                    className="img-fluid dapps-factory d-none"
-                    alt="#"
-                  />
+                      // {idUrl === 'minter' ? 'src={MinterFactory}' : 'src={MinterFactoryWhite}'}
+                      src={MinterFactory}
+                      className="img-fluid dapps-factory d-block"
+                      alt="#"
+                    />
+
+                    <img
+                      src={MinterFactory}
+                      className="img-fluid dapps-factory d-3"
+                      alt="#"
+                    />
+
+                    <img
+                      src={MinterFactory}
+                      className="img-fluid dapps-factory d-4"
+                      alt="#"
+                    />
+                    
+                    <img
+                      src={MinterFactory}
+                      className="img-fluid dapps-factory d-none"
+                      alt="#"
+                    />
+
+
+                  {/* <img
+                  src={logo}
+                  className="img-fluid dapps-factory d-block"
+                  alt="#"
+                  /> */}
+
                 </NavLink>
               </div>
           </div>
@@ -172,29 +184,7 @@ const Header = function({ className }) {
                   {showmenu && 
                   <div className='menu'>
                     <div className='navbar-item'>
-                      <div ref={ref}>
-                        <div className="dropdown-custom dropdown-toggle btn" 
-                          onClick={handleBtnClick}
-                          >
-                          Home
-                        </div>
-                        {openMenu && (
-                          <div className='item-dropdown'>
-                            <div className="dropdown" onClick={closeMenu}>
-                              <NavLink to="/homeGrey" onClick={() => btn_icon(!showmenu)}>Homepage Grey</NavLink>
-                              <NavLink to="/" onClick={() => btn_icon(!showmenu)}>Homepage</NavLink>
-                              <NavLink to="/home1" onClick={() => btn_icon(!showmenu)}>Homepage 1</NavLink>
-                              <NavLink to="/home1Grey" onClick={() => btn_icon(!showmenu)}>Homepage 1 Grey</NavLink>
-                              <NavLink to="/home2" onClick={() => btn_icon(!showmenu)}>Homepage 2</NavLink>
-                              <NavLink to="/home2Grey" onClick={() => btn_icon(!showmenu)}>Homepage 2 Grey</NavLink>
-                              <NavLink to="/home3" onClick={() => btn_icon(!showmenu)}>Homepage 3</NavLink>
-                              <NavLink to="/home4" onClick={() => btn_icon(!showmenu)}>Homepage 4</NavLink>
-                              <NavLink to="/home5" onClick={() => btn_icon(!showmenu)}>Homepage 5</NavLink>
-                              <NavLink to="/home6" onClick={() => btn_icon(!showmenu)}>Homepage 6</NavLink>
-                            </div>
-                          </div>
-                        )}
-                      </div>
+
                     </div>
                     <div className='navbar-item'>
                       <div ref={ref1}>
@@ -206,16 +196,13 @@ const Header = function({ className }) {
                         {openMenu1 && (
                           <div className='item-dropdown'>
                             <div className="dropdown" onClick={closeMenu1}>
-                              <NavLink to="/explore" onClick={() => btn_icon(!showmenu)}>Explore</NavLink>
-                              <NavLink to="/explore2" onClick={() => btn_icon(!showmenu)}>Explore 2</NavLink>
-                              <NavLink to="/exploreOpensea" onClick={() => btn_icon(!showmenu)}>Explore OpenSea</NavLink>
+                              {/* <NavLink to="/explore" onClick={() => btn_icon(!showmenu)}>Explore</NavLink> */}
+                              {/* <NavLink to="/exploreOpensea" onClick={() => btn_icon(!showmenu)}>Explore OpenSea</NavLink> */}
                               <NavLink to="/rangking" onClick={() => btn_icon(!showmenu)}>Rangking</NavLink>
                               <NavLink to="/colection/1" onClick={() => btn_icon(!showmenu)}>Collection</NavLink>
-                              <NavLink to="/ItemDetail/1" onClick={() => btn_icon(!showmenu)}>Items Details</NavLink>
-                              <NavLink to="/ItemDetailGrey/1" onClick={() => btn_icon(!showmenu)}>Items Details Grey</NavLink>
-                              <NavLink to="/Auction" onClick={() => btn_icon(!showmenu)}>Live Auction</NavLink>
-                              <NavLink to="/AuctionGrey" onClick={() => btn_icon(!showmenu)}>Live Auction Grey</NavLink>
-                              <NavLink to="/helpcenter" onClick={() => btn_icon(!showmenu)}>Help Center</NavLink>
+                              {/* <NavLink to="/ItemDetail/1" onClick={() => btn_icon(!showmenu)}>Items Details</NavLink> */}
+                              {/* <NavLink to="/Auction" onClick={() => btn_icon(!showmenu)}>Live Auction</NavLink> */}
+                              {/* <NavLink to="/helpcenter" onClick={() => btn_icon(!showmenu)}>Help Center</NavLink> */}
                             </div>
                           </div>
                         )}
@@ -231,23 +218,18 @@ const Header = function({ className }) {
                         {openMenu2 && (
                           <div className='item-dropdown'>
                             <div className="dropdown" onClick={closeMenu2}>
+                              {/* <NavLink to="/mint" onClick={() => btn_icon(!showmenu)}>Nft Minting</NavLink>
                               <NavLink to="/Author/1" onClick={() => btn_icon(!showmenu)}>Author</NavLink>
                               <NavLink to="/Profile/1" onClick={() => btn_icon(!showmenu)}>Profile</NavLink>
-                              <NavLink to="/AuthorGrey/1" onClick={() => btn_icon(!showmenu)}>Author Grey</NavLink>
                               <NavLink to="/AuthorOpensea" onClick={() => btn_icon(!showmenu)}>Author OpenSea</NavLink>
                               <NavLink to="/wallet" onClick={() => btn_icon(!showmenu)}>Wallet</NavLink>
-                              <NavLink to="/walletGrey" onClick={() => btn_icon(!showmenu)}>Wallet Grey</NavLink>
-                              <NavLink to="/create" onClick={() => btn_icon(!showmenu)}>Create</NavLink>
-                              <NavLink to="/create2" onClick={() => btn_icon(!showmenu)}>Create 2</NavLink>
-                              <NavLink to="/createOptions" onClick={() => btn_icon(!showmenu)}>Create options</NavLink>
-                              <NavLink to="/mint" onClick={() => btn_icon(!showmenu)}>Nft Minting</NavLink>
-                              <NavLink to="/minter" onClick={() => btn_icon(!showmenu)}>Nft Minting Grey</NavLink>
+                              <NavLink to="/create" onClick={() => btn_icon(!showmenu)}>Create</NavLink> */}
+                              {/* <NavLink to="/createOptions" onClick={() => btn_icon(!showmenu)}>Create options</NavLink> */}
                               <NavLink to="/news" onClick={() => btn_icon(!showmenu)}>News</NavLink>
                               <NavLink to="/works" onClick={() => btn_icon(!showmenu)}>Gallery</NavLink>
-                              <NavLink to="/login" onClick={() => btn_icon(!showmenu)}>login</NavLink>
-                              <NavLink to="/loginTwo" onClick={() => btn_icon(!showmenu)}>login 2</NavLink>
+                              {/* <NavLink to="/login" onClick={() => btn_icon(!showmenu)}>login</NavLink>
                               <NavLink to="/register" onClick={() => btn_icon(!showmenu)}>Register</NavLink>
-                              <NavLink to="/contact" onClick={() => btn_icon(!showmenu)}>Contact Us</NavLink>
+                              <NavLink to="/contact" onClick={() => btn_icon(!showmenu)}>Contact Us</NavLink> */}
                             </div>
                           </div>
                         )}
@@ -258,36 +240,22 @@ const Header = function({ className }) {
                         Activity
                       </NavLink>
                     </div>
+
                     <div className='navbar-item'>
-                      <div ref={ref3}>
-                        <div className="dropdown-custom dropdown-toggle btn" 
-                          onClick={handleBtnClick3}
-                          >
-                          Element
-                        </div>
-                        {openMenu3 && (
-                          <div className='item-dropdown'>
-                            <div className="dropdown" onClick={closeMenu3}>
-                              <NavLink to="/elegantIcons" onClick={() => btn_icon(!showmenu)}>Elegant Icon</NavLink>
-                              <NavLink to="/etlineIcons" onClick={() => btn_icon(!showmenu)}>Etline Icon</NavLink>
-                              <NavLink to="/fontAwesomeIcons" onClick={() => btn_icon(!showmenu)}>Font Awesome Icon</NavLink>
-                              <NavLink to="/accordion" onClick={() => btn_icon(!showmenu)}>Accordion</NavLink>
-                              <NavLink to="/alerts" onClick={() => btn_icon(!showmenu)}>Alerts</NavLink>
-                              <NavLink to="/price" onClick={() => btn_icon(!showmenu)}>Pricing Table</NavLink>
-                              <NavLink to="/progressbar" onClick={() => btn_icon(!showmenu)}>Progress bar</NavLink>
-                              <NavLink to="/tabs" onClick={() => btn_icon(!showmenu)}>Tabs</NavLink>
-                            </div>
-                          </div>
-                        )}
-                      </div>
+                      <NavLink to="/mint" onClick={() => btn_icon(!showmenu)}>
+                        Create
+                      </NavLink>
                     </div>
+
                   </div>
                   }
                 </Breakpoint>
 
                 <Breakpoint xl>
+
+              
                   <div className='menu'>
-                    <div className='navbar-item'>
+                    {/* <div className='navbar-item'>
                         <div ref={ref}>
                           <div className="dropdown-custom dropdown-toggle btn" 
                              onMouseEnter={handleBtnClick} onMouseLeave={closeMenu}>
@@ -296,54 +264,39 @@ const Header = function({ className }) {
                             {openMenu && (
                             <div className='item-dropdown'>
                               <div className="dropdown" onClick={closeMenu}>
-                                <NavLink to="/homeGrey">Homepage Grey</NavLink>
+
                                 <NavLink to="/">Homepage</NavLink>
-                                <NavLink to="/home1">Homepage 1</NavLink>
-                                <NavLink to="/home1Grey">Homepage 1 Grey</NavLink>
-                                <NavLink to="/home2">Homepage 2</NavLink>
-                                <NavLink to="/home2Grey">Homepage 2 Grey</NavLink>
-                                <NavLink to="/home3">Homepage 3</NavLink>
-                                <NavLink to="/home4">Homepage 4</NavLink>
-                                <NavLink to="/home5">Homepage 5</NavLink>
-                                <NavLink to="/home6">Homepage 6</NavLink>
+
+
                               </div>
                             </div>
                           )}
                           </div>
                           
                         </div>
-                    </div>
+                    </div> */}
+
+
+
+
                     <div className='navbar-item'>
-                      <div ref={ref1}>
-                          <div className="dropdown-custom dropdown-toggle btn" 
-                             onMouseEnter={handleBtnClick1} onMouseLeave={closeMenu1}>
-                            Explore
-                            <span className='lines'></span>
-                            {openMenu1 && (
-                            <div className='item-dropdown'>
-                              <div className="dropdown" onClick={closeMenu1}>
-                              <NavLink to="/explore">Explore</NavLink>
-                              <NavLink to="/exploreGrey">Explore Grey</NavLink>
-                              <NavLink to="/explore2">Explore 2</NavLink>
-                              <NavLink to="/explore2Grey">Explore 2 Grey</NavLink>
-                              <NavLink to="/exploreOpensea">Explore OpenSea</NavLink>
-                              <NavLink to="/rangking">Rangking</NavLink>
-                              <NavLink to="/rangkingGrey">Rangking Grey</NavLink>
-                              <NavLink to="/colection/1">Collection</NavLink>
-                              <NavLink to="/colectionGrey/1">Collection Grey</NavLink>
-                              <NavLink to="/ItemDetail/1">Items Details</NavLink>
-                              <NavLink to="/ItemDetailGrey/1">Items Details Grey</NavLink>
-                              <NavLink to="/Auction">Live Auction</NavLink>
-                              <NavLink to="/AuctionGrey">Live Auction Grey</NavLink>
-                              <NavLink to="/helpcenter">Help Center</NavLink>
-                              <NavLink to="/helpcenterGrey">Help Center Grey</NavLink>
-                              </div>
-                            </div>
-                          )}
-                          </div>
-                          
-                        </div>
+                      <NavLink to="/home">
+                      Home
+                      <span className='lines'></span>
+                      </NavLink>
                     </div>
+
+
+                    <div className='navbar-item'>
+                      <NavLink to="/mint">
+                      Create
+                      <span className='lines'></span>
+                      </NavLink>
+                    </div>
+
+
+
+
                     <div className='navbar-item'>
                       <div ref={ref2}>
                           <div className="dropdown-custom dropdown-toggle btn" 
@@ -353,39 +306,64 @@ const Header = function({ className }) {
                             {openMenu2 && (
                             <div className='item-dropdown'>
                               <div className="dropdown" onClick={closeMenu2}>
-                              <NavLink to="/Author/1">Author</NavLink>
-                              <NavLink to="/Profile/1">Profile</NavLink>
-                              <NavLink to="/AuthorGrey/1">Author Grey</NavLink>
-                              <NavLink to="/AuthorOpensea">Author OpenSea</NavLink>
-                              <NavLink to="/wallet">Wallet</NavLink>
-                              <NavLink to="/walletGrey">Wallet Grey</NavLink>
-                              <NavLink to="/create">Create</NavLink>
-                              <NavLink to="/createGrey">Create Grey</NavLink>
-                              <NavLink to="/create2">Create 2</NavLink>
-                              <NavLink to="/createOptions">Create Option</NavLink>
-                              <NavLink to="/mint">Nft Minting</NavLink>
-                              <NavLink to="/minter">Nft Minting Grey</NavLink>
+                              {/* <NavLink to="/Author/1">Author</NavLink> */}
+                              {/* <NavLink to="/Profile/1">Profile</NavLink>
+                              <NavLink to="/AuthorOpensea">Author OpenSea</NavLink> */}
+                              {/* <NavLink to="/wallet">Wallet</NavLink>
+                              <NavLink to="/create">Create</NavLink> */}
+                              {/* <NavLink to="/createOptions">Create Option</NavLink> */}
+                              {/* <NavLink to="/mint">Nft Minting</NavLink> */}
                               <NavLink to="/news">News</NavLink>
                               <NavLink to="/works">Gallery</NavLink>
-                              <NavLink to="/login">login</NavLink>
-                              <NavLink to="/loginTwo">login 2</NavLink>
-                              <NavLink to="/register">Register</NavLink>
-                              <NavLink to="/contact">Contact Us</NavLink>
+                              {/* <NavLink to="/login">login</NavLink>
+                              <NavLink to="/register">Register</NavLink> */}
+                              {/* <NavLink to="/contact">Contact Us</NavLink> */}
                               </div>
                             </div>
                           )}
                           </div>
                         </div>
                     </div>
+
+
+
+                    <div className='navbar-item'>
+                      <div ref={ref1}>
+                          <div className="dropdown-custom dropdown-toggle btn" 
+                             onMouseEnter={handleBtnClick1} onMouseLeave={closeMenu1}>
+                            Explore
+                            <span className='lines'></span>
+                            {openMenu1 && (
+                            <div className='item-dropdown'>
+                              <div className="dropdown" onClick={closeMenu1}>
+                              {/* <NavLink to="/explore">Explore</NavLink> */}
+                              {/* <NavLink to="/exploreOpensea">Explore OpenSea</NavLink> */}
+                              <NavLink to="/rangking">Rangking</NavLink>
+                              <NavLink to="/colection/1">Collection</NavLink>
+                              {/* <NavLink to="/ItemDetail/1">Items Details</NavLink> */}
+                              {/* <NavLink to="/Auction">Live Auction</NavLink> */}
+                              {/* <NavLink to="/helpcenter">Help Center</NavLink> */}
+                              </div>
+                            </div>
+                          )}
+                          </div>
+                          
+                        </div>
+                    </div>
+
+
+
                     <div className='navbar-item'>
                       <NavLink to="/activity">
                       Activity
                       <span className='lines'></span>
                       </NavLink>
                     </div>
+
+
                     <div className='navbar-item'>
                       <div ref={ref3}>
-                          <div className="dropdown-custom dropdown-toggle btn" 
+                          {/* <div className="dropdown-custom dropdown-toggle btn" 
                              onMouseEnter={handleBtnClick3} onMouseLeave={closeMenu3}>
                             Elements
                             <span className='lines'></span>
@@ -403,7 +381,7 @@ const Header = function({ className }) {
                               </div>
                             </div>
                           )}
-                          </div>
+                          </div> */}
                         </div>
                     </div>
                   </div>

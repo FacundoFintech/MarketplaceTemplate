@@ -4,10 +4,15 @@ import {
   getCurrentWalletConnected,
   mintNFT,
 } from "../../core/nft/interact";
-import { createGlobalStyle } from 'styled-components';
+// import { createGlobalStyle } from 'styled-components';
+import Moralis from 'moralis';
+import ImageHandler from './imageHandler'
 import ColumnNewMint from '../components/ColumnNewMint';
 import api from "../../core/api";
 import Footer from '../components/footer';
+import Form from 'react-bootstrap/Form'
+import { createGlobalStyle } from 'styled-components';
+
 
 const GlobalStyles = createGlobalStyle`
   header#myHeader.navbar.sticky.white {
@@ -63,6 +68,11 @@ const Minter = (props) => {
   const [manualInput, setManualInput] = useState(false);
   const [isMinting, setisMinting] = useState(false);
 
+  const [loadingImg, setLoadingImg] = useState(false);
+  const [fileUrl, updateFileUrl] = useState('');
+
+
+
   useEffect(() => {
     async function getExistingWallet() {
       const { address, status } = await getCurrentWalletConnected();
@@ -101,6 +111,25 @@ const Minter = (props) => {
     }
   }
 
+  async function onChange(e) {
+    setLoadingImg(true)
+    const file = e.target.files[0]
+    try {
+        console.log("el loadingImg: ",loadingImg)
+        console.log("el file: ",file)
+        const filee = new Moralis.File(file.name, file)
+        await filee.saveIPFS({useMasterKey: true});
+        console.log(filee.ipfs(), filee.hash())
+        const url = filee.ipfs()
+        updateFileUrl(url)
+        console.log('el file URL: ' + fileUrl)
+        setLoadingImg(false)
+    } catch (error) {
+        console.log('Error uploading file: ', error)
+    }
+  }
+
+
   const connectWalletPressed = async () => {
     const walletResponse = await connectWallet();
     setStatus(walletResponse.status);
@@ -109,7 +138,7 @@ const Minter = (props) => {
 
   const onMintPressed = async () => {
     setisMinting(true);
-    const { success, status } = await mintNFT(url, name, description);
+    const { success, status } = await mintNFT(fileUrl, name, description); 
     setStatus(status);
     if (success) {
       setName("");
@@ -133,8 +162,9 @@ const Minter = (props) => {
   }
 
   const isEmpty = useCallback(() => {
-    return url.trim() === '' || name.trim() === '' || description.trim() === '';
-  }, [url, name, description]);
+    return fileUrl.trim() === '' || name.trim() === '' || description.trim() === '';
+    console.log(fileUrl, name, description);
+  }, [fileUrl, name, description]);
 
   return (
     <div>
@@ -184,13 +214,27 @@ const Minter = (props) => {
                 <ColumnNewMint onSelectNft={onSelectNft} showLoadMore={false} authorId="1" />
               ) : (
                 <form>
-                  <h2>Link to image asset: </h2>
+                  {/* <h2>Link to image asset: </h2>
                   <input
                     className="form-control"
                     type="text"
                     placeholder="e.g. https://gateway.pinata.cloud/ipfs/<hash>"
                     onChange={(event) => setURL(event.target.value)}
-                  />
+                  /> */}
+                  {/* <Input
+                    name="imagen"
+                    type="file"
+                    onChange={onChange}
+                    value={state.imagen}
+                    disabled={loadingImg}
+                    className='form-input'
+                    id="filePicker" style={{ display: 'none' }}
+                  /> */}
+                  <Form.Group controlId="formFileLg" className="mb-3">
+                    <Form.Label>Large file input example</Form.Label>
+                    <Form.Control onChange={onChange} type="file"/>
+                  </Form.Group>
+                  <ImageHandler/>
                   <h2>Name: </h2>
                   <input
                     className="form-control"
@@ -206,30 +250,31 @@ const Minter = (props) => {
                     onChange={(event) => setDescription(event.target.value)}
                   />
                 </form>
-              )}
-              {!isEmpty() &&
-                <>
-                  <span>NFT Name: { name }</span> 
-                  <br />
-                  <br />
-                  <button id="mintButton" className="btn-main" onClick={onMintPressed}>
-                    Proceed to Mint
-                  </button>
-                  <br />
-                </>
-              }
-              <p id="status">
-                {status}
-              </p>
-            </>
-          }
-        </div>
-        )}
-        </div>
-      </section>
-      <Footer />
-    </div>
-  );
-};
-
-export default Minter;
+               )}
+               {!isEmpty() &&
+                 <>
+                   <span>NFT Name: { name }</span> 
+                   <br />
+                   <br />
+                   <button id="mintButton" className="btn-main" onClick={onMintPressed}>
+                     Proceed to Mint
+                   </button>
+                   <br/>
+                 </>
+               }
+               <p id="status">
+                 {status}
+               </p>
+             </>
+           }
+         </div>
+         )}
+         </div>
+       </section>
+       <Footer />
+     </div>
+   );
+ };
+ 
+ export default Minter;
+ 

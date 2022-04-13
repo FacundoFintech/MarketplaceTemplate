@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from '@reach/router';
-import MinterFactory from '../../assets/Logos/MinterFactory.svg';
+import MinterFactory from '../../assets/Logos/logoMinterGris.svg';
 import './footer.css';
 
 
@@ -81,11 +81,10 @@ const footer= () => (
                                 </div>
                                 <div className="de-flex-col">
                                     <div className="social-icons">
-                                        <span onClick={()=> window.open("", "_self")}><i className="fa fa-facebook fa-lg"></i></span>
-                                        <span onClick={()=> window.open("", "_self")}><i className="fa fa-twitter fa-lg"></i></span>
-                                        <span onClick={()=> window.open("", "_self")}><i className="fa fa-linkedin fa-lg"></i></span>
-                                        <span onClick={()=> window.open("", "_self")}><i className="fa fa-pinterest fa-lg"></i></span>
-                                        <span onClick={()=> window.open("", "_self")}><i className="fa fa-rss fa-lg"></i></span>
+                                        <span onClick={()=> window.open("https://www.facebook.com/ActionFintech", "_blank")}><i className="fa fa-facebook fa-lg"></i></span>
+                                        <span onClick={()=> window.open("https://www.linkedin.com/company/dappsfactory/", "_blank")}><i className="fa fa-linkedin fa-lg"></i></span>
+                                        <span onClick={()=> window.open("https://www.instagram.com/minterfactory/", "_blank")}><i className="fa fa-instagram fa-lg"></i></span>
+                                        {/* <span onClick={()=> window.open("", "_self")}><i className="fa fa-rss fa-lg"></i></span> */}
                                     </div>
                                 </div>
                             </div>
