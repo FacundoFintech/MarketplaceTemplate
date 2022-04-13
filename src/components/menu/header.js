@@ -127,7 +127,7 @@ const Header = function({ className }) {
 
     useState(() => {
       if(idUrl !== '/') {
-        setLogo(MinterFactoryWhite);
+        setLogo(MinterFactory);
       }
     }, []);
 

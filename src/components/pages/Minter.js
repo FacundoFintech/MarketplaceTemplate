@@ -234,7 +234,7 @@ const Minter = (props) => {
                     <Form.Label>Large file input example</Form.Label>
                     <Form.Control onChange={onChange} type="file"/>
                   </Form.Group>
-                  <ImageHandler/>
+                  <ImageHandler setFileUrl={updateFileUrl} fileUrl={fileUrl}/>
                   <h2>Name: </h2>
                   <input
                     className="form-control"
