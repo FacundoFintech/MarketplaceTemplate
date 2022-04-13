@@ -20,45 +20,51 @@ const ImageGallery = () => {
   }, [isLoading, user/* ,address , user.attribues.ethAddress , user*/]);
 
 
-  // if (isLoading) {
+  if (isLoading) {
     return ( 
       <>
-        <Placeholder as="p" animation="glow">
+        <Placeholder as="p" animation="wave">
           <Placeholder xs={12} />
+        </Placeholder>
+        <Placeholder as="p" animation="wave">
+          <Placeholder xs={6} />
+        </Placeholder> 
+        <Placeholder as="p" animation="wave">
+          <Placeholder xs={8} />
         </Placeholder>
         <Placeholder as="p" animation="wave">
           <Placeholder xs={12} />
         </Placeholder> 
       </>
   )
-  // } else {
-  //   return (
-  //     <>
-  //       <div className="justify-content-center">
-  //         <div className="p-4">
-  //           <Container>
-  //             <Row>
-  //               {data?.result.filter(nft=>nft.image).map((nft, index) => {
-  //                 return (
-  //                   <Col xs={6} md={4}>
-  //                     <div key={index} className="nft-container">
-  //                       <img src={nft.image} alt="foto-nft" className="gallery-foto overflow-hidden" />
-  //                       <div className="p-1 bg-dark name-container">
-  //                         <p className="nft-name">{nft.name}</p>
-  //                       </div>
-  //                     </div>
-  //                   </Col>
-  //                 )
-  //               }
+  } else {
+    return (
+      <>
+        <div className="justify-content-center">
+          <div className="p-4">
+            <Container>
+              <Row>
+                {data?.result.filter(nft=>nft.image).map((nft, index) => {
+                  return (
+                    <Col xs={6} md={4}>
+                      <div key={index} className="nft-container">
+                        <img src={nft.image} alt="foto-nft" className="gallery-foto overflow-hidden" />
+                        <div className="p-1 bg-dark name-container">
+                          <p className="nft-name">{nft.name}</p>
+                        </div>
+                      </div>
+                    </Col>
+                  )
+                }
 
-  //               )}
-  //             </Row>
-  //           </Container>
-  //         </div>
-  //       </div>
-  //     </>
-  //   )
-  // }
+                )}
+              </Row>
+            </Container>
+          </div>
+        </div>
+      </>
+    )
+  }
 }
 
 
