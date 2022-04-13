@@ -70,23 +70,23 @@ const Minter = (props) => {
     }
   }
 
-  async function onChange(e) {
-    setLoadingImg(true)
-    const file = e.target.files[0]
-    try {
-        console.log("el loadingImg: ",loadingImg)
-        console.log("el file: ",file)
-        const filee = new Moralis.File(file.name, file)
-        await filee.saveIPFS({useMasterKey: true});
-        console.log(filee.ipfs(), filee.hash())
-        const url = filee.ipfs()
-        updateFileUrl(url)
-        console.log('el file URL: ' + fileUrl)
-        setLoadingImg(false)
-    } catch (error) {
-        console.log('Error uploading file: ', error)
-    }
-  }
+  // async function onChange(e) {
+  //   setLoadingImg(true)
+  //   const file = e.target.files[0]
+  //   try {
+  //       console.log("el loadingImg: ",loadingImg)
+  //       console.log("el file: ",file)
+  //       const filee = new Moralis.File(file.name, file)
+  //       await filee.saveIPFS({useMasterKey: true});
+  //       console.log(filee.ipfs(), filee.hash())
+  //       const url = filee.ipfs()
+  //       updateFileUrl(url)
+  //       console.log('el file URL: ' + fileUrl)
+  //       setLoadingImg(false)
+  //   } catch (error) {
+  //       console.log('Error uploading file: ', error)
+  //   }
+  // }
 
   const connectWalletPressed = async () => {
     const walletResponse = await connectWallet();
@@ -192,7 +192,7 @@ const Minter = (props) => {
                     <Form.Control onChange={onChange} type="file"/>
                   </Form.Group> */}
                   <h2>Image: </h2>
-                  <ImageHandler/>
+                  <ImageHandler setFileUrl={updateFileUrl} fileUrl={fileUrl}/>
                   <h2>Name: </h2>
                   <input
                     className="form-control"

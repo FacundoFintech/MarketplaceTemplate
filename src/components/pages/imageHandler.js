@@ -6,11 +6,12 @@ import Moralis from "moralis"
 import imageIcon from '../../assets/image-icon.svg';
 
 
-const ImageHandler = () => {
+const ImageHandler = ({setFileUrl, fileUrl}) => {
 
   
+  
   const [loadingImg, setLoadingImg] = useState(false);
-  const [fileUrl, updateFileUrl] = useState('');
+  // const [fileUrl, updateFileUrl] = useState('');
   // const [file, setFile] = React.useState();
 
   //codigo seba
@@ -36,7 +37,7 @@ const ImageHandler = () => {
         await filee.saveIPFS({useMasterKey: true});
         console.log(filee.ipfs(), filee.hash())
         const url = filee.ipfs()
-        updateFileUrl(url)
+        setFileUrl(url)
         console.log('el file URL: ' + fileUrl)
         setLoadingImg(false)
     } catch (error) {
@@ -78,7 +79,7 @@ const ImageHandler = () => {
         await filee.saveIPFS({useMasterKey: true});
         console.log(filee.ipfs(), filee.hash())
         const url = filee.ipfs()
-        updateFileUrl(url)
+        setFileUrl(url)
         console.log('el file URL: ' + fileUrl)
         setLoadingImg(false)
     } catch (error) {
