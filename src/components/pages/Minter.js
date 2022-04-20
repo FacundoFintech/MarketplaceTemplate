@@ -12,6 +12,7 @@ import api from "../../core/api";
 import Footer from '../components/footer';
 import Form from 'react-bootstrap/Form'
 import { createGlobalStyle } from 'styled-components';
+import { useMoralis, useChain } from 'react-moralis';
 
 
 const GlobalStyles = createGlobalStyle`
@@ -140,11 +141,10 @@ const Minter = (props) => {
     setisMinting(true);
     const { success, status } = await mintNFT(fileUrl, name, description); 
     setStatus(status);
-    if (success) {
-      setName("");
-      setDescription("");
-      setURL("");
-    }
+    setName("");
+    setDescription("");
+    setURL("");
+    updateFileUrl("");
     setisMinting(false);
   };
   

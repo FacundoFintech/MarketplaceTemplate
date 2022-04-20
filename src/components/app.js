@@ -29,8 +29,12 @@ import Accordion from './pages/accordion';
 import Minter from './pages/Minter';
 import auth from '../core/auth';
 import Profile from './pages/Profile';
+import { useChain, useMoralis } from 'react-moralis';
 
 import { createGlobalStyle } from 'styled-components';
+
+
+
 
 const GlobalStyles = createGlobalStyle`
   :root {
@@ -67,48 +71,69 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
   )
 };
 
-const app= () => (
+const App= () => {
+
+  const { isAuthenticated , isWeb3Enabled , isWeb3EnableLoading , enableWeb3 } = useMoralis();
+  
+  const { switchNetwork, chainId, chain } = useChain();
+  useEffect(() => {
+      const connectorId = window.localStorage.getItem("connectorId");
+      if (isAuthenticated && !isWeb3Enabled && !isWeb3EnableLoading){
+          enableWeb3({ provider: connectorId });}
+      if (chainId != null && chainId != '0x13881') {
+        if (window.confirm("You're on the wrong network! Click OK to switch to Polygon.")) {
+                switchNetwork("0x13881")
+              } else {
+                alert("You're on the wrong network & will result in loss of funds due to failed transaction! Switch to Polygon chain manually in your Metamask Wallet!");
+              }
+      }  
+    }, [isAuthenticated, isWeb3Enabled, chain]);
+
+  console.log("chainId: ", chainId)
+
+  return(
   <div className="wraper">
   <GlobalStyles />
     <Header/>
       <PosedRouter>
-      <ScrollTop path="/">
-        <Home exact path="/">
-          <Redirect to="/home" />
-        </Home>
-        <Explore path="/explore" />
-        <ExploreOpensea path="/exploreOpensea" />
-        <RankingRedux path="/rangking" />
-        <Auction path="/Auction" />
-        <Helpcenter path="/helpcenter" />
-        <Colection path="/colection/:collectionId" />
-        <ItemDetailRedux path="/ItemDetail/:nftId" />
-        {/* 
-          PROTECTED ROUTE :
-          you can use this to protect your route, user must login first to access
-         */}
-        <ProtectedRoute component={Author} path="/Author/:authorId"/>
-        <ProtectedRoute component={Profile} path="/Profile/:authorId"/>
-        {/* 
-        <Author path="/Author/:authorId" /> 
-        */}
-        <AuthorOpensea path="/AuthorOpensea" />
-        <Wallet path="/wallet" />
-        <Login path="/login" />
-        <Register path="/register" />
-        <Price path="/price" />
-        <Works path="/works" />
-        <News path="/news" />
-        <NewsSingle path="/news/:postId" />
-        <Create path="/create" />
-        <Createoption path="/createOptions" />
-        <Activity path="/activity" />
-        <Contact path="/contact" />
-        <Accordion path="/accordion" />
-        <Minter path="/mint" />
-        </ScrollTop>
+        <ScrollTop path="/">
+          <Home exact path="/">
+            <Redirect to="/home" />
+          </Home>
+          <Explore path="/explore" />
+          <ExploreOpensea path="/exploreOpensea" />
+          <RankingRedux path="/rangking" />
+          <Auction path="/Auction" />
+          <Helpcenter path="/helpcenter" />
+          <Colection path="/colection/:collectionId" />
+          <ItemDetailRedux path="/ItemDetail/:nftId" />
+          {/* 
+            PROTECTED ROUTE :
+            you can use this to protect your route, user must login first to access
+          */}
+          <ProtectedRoute component={Author} path="/Author/:authorId"/>
+          <ProtectedRoute component={Profile} path="/Profile/:authorId"/>
+          {/* 
+          <Author path="/Author/:authorId" /> 
+          */}
+          <AuthorOpensea path="/AuthorOpensea" />
+          <Wallet path="/wallet" />
+          <Login path="/login" />
+          <Register path="/register" />
+          <Price path="/price" />
+          <Works path="/works" />
+          <News path="/news" />
+          <NewsSingle path="/news/:postId" />
+          <Create path="/create" />
+          <Createoption path="/createOptions" />
+          <Activity path="/activity" />
+          <Contact path="/contact" />
+          <Accordion path="/accordion" />
+          <Minter path="/mint" />
+          </ScrollTop>
       </PosedRouter>
     <ScrollToTopBtn />
   </div>
-);
-export default app;
+)
+};
+export default App;

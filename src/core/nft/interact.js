@@ -1,4 +1,5 @@
 import { pinJSONToIPFS } from "./pinata.js";
+import './interact.css';
 require("dotenv").config();
 const alchemyKey = process.env.REACT_APP_ALCHEMY_KEY;
 const contractABI = require("./contract-abi.json");
@@ -127,7 +128,7 @@ export const mintNFT = async (fileUrl, name, description) => {
       success: true,
       status: (
         <>
-          <p>Check out your transaction on Etherscan: </p> 
+          <p id="check-tx">Check out your transaction on Etherscan: </p> 
           <a target="_blank" rel="noreferrer" href={`https://mumbai.polygonscan.com/tx/${txHash}`}>
                 <p>https://mumbai.polygonscan.com/tx/{txHash}</p>
           </a>

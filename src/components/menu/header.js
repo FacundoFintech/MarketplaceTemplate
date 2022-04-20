@@ -5,10 +5,11 @@ import useOnclickOutside from "react-cool-onclickoutside";
 import auth from '../../core/auth';
 import { navigate } from '@reach/router';
 import MinterFactory from '../../assets/Logos/logoMinterGris.svg';
+import MinterFactoryWhite from '../../assets/Logos/MinterFactoryWhite.svg';
 // import logo from '../../assets/Logos/logoMinterGris.svg';
 // import MinterFactoryWhite from '../../assets/Logos/MinterFactoryWhite.svg';
 import './header.css';
-import { useParams } from "react-router-dom";
+import { useLocation , useHistory} from "react-router-dom";
 
 
 setDefaultBreakpoints([
@@ -34,8 +35,10 @@ const NavLink = props => (
 
 const Header = function({ className }) {
   
-    let { idUrl } = useParams();
+    let idUrl  = useLocation();
+    // const history = useHistory();
     const [logo, setLogo] = useState(MinterFactory);
+    const [url, setUrl] = useState(useLocation());
 
     const [openMenu, setOpenMenu] = React.useState(false);
     const [openMenu1, setOpenMenu1] = React.useState(false);
@@ -123,13 +126,49 @@ const Header = function({ className }) {
       };
     }, []);
 
-    console.log("el id url: ", {idUrl});
+    // console.log("el id url: ", idUrl.pathname);
 
-    useState(() => {
-      if(idUrl !== '/') {
-        setLogo(MinterFactory);
-      }
-    }, []);
+    // useState(() => {
+    //   if(idUrl !== '/') {
+    //     setLogo(MinterFactory);
+    //   }
+    // }, []);
+
+    // useEffect(() => {
+    //   setUrl(idUrl.pathname);
+    //   if (idUrl.pathname === '/mint') {
+    //     console.log("es mint")
+    //   } else {
+    //     console.log("no es mint")
+    //   }
+    // }, [idUrl || idUrl.pathname || url]);
+    useEffect(() => {
+      setUrl(idUrl.pathname);
+    }, [idUrl]);
+
+    // console.log("el id url: ", url);
+
+  //   useEffect(() => {
+  //     return history.listen((location) => { 
+  //        console.log(`You changed the page to: ${location.pathname}`) 
+  //     }) 
+  //  },[idUrl]) 
+
+    useEffect(() => {
+      console.log("exito!!!");
+      if(url !== '/mint') {
+          setLogo(MinterFactory);
+        } else {
+          setLogo(MinterFactoryWhite);
+        }
+    }, [url]);
+
+    // if (idUrl.pathname === '/mint') {
+    //   console.log("es mint")
+    // } else {
+    //   console.log("no es mint")
+    // }
+
 
     return (
     <header className={`navbar white ${className}`} id="myHeader">
@@ -141,25 +180,25 @@ const Header = function({ className }) {
 
                   <img
                       // {idUrl === 'minter' ? 'src={MinterFactory}' : 'src={MinterFactoryWhite}'}
-                      src={MinterFactory}
+                      src={logo}
                       className="img-fluid dapps-factory d-block"
                       alt="#"
                     />
 
                     <img
-                      src={MinterFactory}
+                      src={logo}
                       className="img-fluid dapps-factory d-3"
                       alt="#"
                     />
 
                     <img
-                      src={MinterFactory}
+                      src={logo}
                       className="img-fluid dapps-factory d-4"
                       alt="#"
                     />
                     
                     <img
-                      src={MinterFactory}
+                      src={logo}
                       className="img-fluid dapps-factory d-none"
                       alt="#"
                     />
@@ -338,7 +377,7 @@ const Header = function({ className }) {
                               <div className="dropdown" onClick={closeMenu1}>
                               {/* <NavLink to="/explore">Explore</NavLink> */}
                               {/* <NavLink to="/exploreOpensea">Explore OpenSea</NavLink> */}
-                              <NavLink to="/rangking">Rangking</NavLink>
+                              <NavLink to="/rangking">Ranking</NavLink>
                               <NavLink to="/colection/1">Collection</NavLink>
                               {/* <NavLink to="/ItemDetail/1">Items Details</NavLink> */}
                               {/* <NavLink to="/Auction">Live Auction</NavLink> */}
