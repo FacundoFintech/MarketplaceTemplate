@@ -24,8 +24,11 @@
 
 input[type="file"] {
   display: none;
+
+
 }
 
 .image-icon{
   width: 60px;
+
 }

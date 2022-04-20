@@ -7,11 +7,14 @@ import {
 // import { createGlobalStyle } from 'styled-components';
 import Moralis from 'moralis';
 import ImageHandler from './imageHandler'
+import AddProperties from "./AddProperties";
 import ColumnNewMint from '../components/ColumnNewMint';
 import api from "../../core/api";
 import Footer from '../components/footer';
-import Form from 'react-bootstrap/Form'
+import {Row,Col,FormControl, InputGroup, Modal, Button,Container} from 'react-bootstrap'
 import { createGlobalStyle } from 'styled-components';
+
+
 
 
 const GlobalStyles = createGlobalStyle`
@@ -70,6 +73,12 @@ const Minter = (props) => {
 
   const [loadingImg, setLoadingImg] = useState(false);
   const [fileUrl, updateFileUrl] = useState('');
+
+
+  const [properties, setProperties] = useState([]);
+  const [modal,setModal] = useState(false);
+  const [addProps, setAddProps] = useState(false);
+
 
 
 
@@ -138,27 +147,32 @@ const Minter = (props) => {
 
   const onMintPressed = async () => {
     setisMinting(true);
-    const { success, status } = await mintNFT(fileUrl, name, description); 
+    const { success, status } = await mintNFT(fileUrl, name, description,properties); 
     setStatus(status);
     if (success) {
       setName("");
       setDescription("");
       setURL("");
+      setProperties([]);
     }
     setisMinting(false);
   };
+
+
   
   const toggleInput = () => {
     setManualInput(!manualInput)
     setName("");
     setDescription("");
     setURL("");
+    setProperties([]);
   };
 
   const onSelectNft = (nft) => {
     setName(nft.title);
     setDescription(nft.description);
     setURL(api.baseUrl + nft.preview_image.url);
+    setProperties(nft.properties);
   }
 
   const isEmpty = useCallback(() => {
@@ -166,7 +180,41 @@ const Minter = (props) => {
     console.log(fileUrl, name, description);
   }, [fileUrl, name, description]);
 
+
+
+  const vacio = useCallback(() => {
+    return properties.length === 0;
+  }, [properties]);
+
+
+
+  const addProperty = async () => {
+    properties(true);
+    const { success, status } = await mintNFT(properties); 
+    setStatus(status);
+    if (success) {
+      setProperties([]);
+    }
+    setisMinting(false);
+  }
+
+
+  const openModal = () => {
+    setModal(true)
+  }
+
+  const closeModal = () => {
+    setModal(false)
+  }
+
+  const agregarProp = () => {
+    setAddProps(true);
+  }
+
+
+  
   return (
+
     <div>
       <GlobalStyles/>
       <section className='jumbotron breadcumb no-bg' style={{backgroundImage: `url(${'./img/background/subheader.jpg'})`}}>
@@ -214,26 +262,6 @@ const Minter = (props) => {
                 <ColumnNewMint onSelectNft={onSelectNft} showLoadMore={false} authorId="1" />
               ) : (
                 <form>
-                  {/* <h2>Link to image asset: </h2>
-                  <input
-                    className="form-control"
-                    type="text"
-                    placeholder="e.g. https://gateway.pinata.cloud/ipfs/<hash>"
-                    onChange={(event) => setURL(event.target.value)}
-                  /> */}
-                  {/* <Input
-                    name="imagen"
-                    type="file"
-                    onChange={onChange}
-                    value={state.imagen}
-                    disabled={loadingImg}
-                    className='form-input'
-                    id="filePicker" style={{ display: 'none' }}
-                  /> */}
-                  {/* <Form.Group controlId="formFileLg" className="mb-3">
-                    <Form.Label>Large file input example</Form.Label>
-                    <Form.Control onChange={onChange} type="file"/>
-                  </Form.Group> */}
                   <h2>Image: </h2>
                   <ImageHandler setFileUrl={updateFileUrl} fileUrl={fileUrl}/>
                   <h2>Name: </h2>
@@ -250,19 +278,74 @@ const Minter = (props) => {
                     placeholder="e.g. My Cool NFT!"
                     onChange={(event) => setDescription(event.target.value)}
                   />
+
+                  <hr/>
+                
                 </form>
                )}
+               
+
+
+
+               {/* Opción de agregar propiedades/stats/levels: */}
+
+
+               
                {!isEmpty() &&
-                 <>
-                   <span>NFT Name: { name }</span> 
-                   <br />
-                   <br />
-                   <button id="mintButton" className="btn-main" onClick={onMintPressed}>
-                     Proceed to Mint
-                   </button>
-                   <br/>
-                 </>
+              <>
+              <Container>
+                <Row>
+                  <Col xs={6} md={4}>
+                    <h4>Properties </h4>
+                      <button id="mintButton" className="btn-main" onClick={openModal}>
+                            Add 
+                      </button>
+                  </Col>
+                  <Col xs={6} md={4}>
+                    <h4>Stats </h4>
+                      <button id="mintButton" className="btn-main">
+                                Add 
+                      </button>
+                  </Col>
+                  <Col xs={6} md={4}>
+                    <h4>Levels </h4>
+                      <button id="mintButton" className="btn-main">
+                                Add 
+                      </button>
+                  </Col>
+                </Row>
+    
+
+
+
+              {/* Abre modal: */}
+
+              <AddProperties agregarProp={agregarProp} closeModal={closeModal} setModal={setModal} modal={modal} addProps={addProps}/>
+
+
+
+              <br />
+              <br />
+              <span>NFT Name: { name }</span> 
+              <br />
+              <br />
+              <button id="mintButton" className="btn-main" onClick={onMintPressed}>
+                 Proceed to Mint
+              </button>
+              <br/>
+              <br/>
+
+              </Container>
+              </>
+                
                }
+
+
+
+
+
+
+
                <p id="status">
                  {status}
                </p>

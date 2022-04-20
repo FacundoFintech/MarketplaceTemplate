@@ -94,7 +94,7 @@ const ImageHandler = ({setFileUrl, fileUrl}) => {
             <label htmlFor="fileInput" className="custom-file-upload">
             {!file
                 ? <img src={imageIcon} alt="image-icon" className="image-icon" />
-                : <img src={URL.createObjectURL(file)} width="auto" height="245px" alt="imagen" style={{ margin: "1rem", maxWidth: '340px' }} />}
+                : <img src={URL.createObjectURL(file)} width="auto" height="245px" alt="imagen" style={{ margin: "1rem", maxWidth: '340px', borderRadius: '5%' }} />}
               <input type="file" name="fileInput" id="fileInput" onChange={(e) => onChangeImg(e)} />
             </label>
         </div>
