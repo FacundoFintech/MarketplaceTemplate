@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Router, Location, Redirect } from '@reach/router';
+import { Router, Location, Redirect  } from '@reach/router';
 import ScrollToTopBtn from './menu/ScrollToTop';
 import Header from './menu/header';
 import Home from './pages/home';
@@ -91,15 +91,16 @@ const App= () => {
 
   console.log("chainId: ", chainId)
 
+
   return(
   <div className="wraper">
   <GlobalStyles />
-    <Header/>
+      <Location>{location=><Header location={location}/>}</Location>
       <PosedRouter>
         <ScrollTop path="/">
-          <Home exact path="/">
-            <Redirect to="/home" />
-          </Home>
+          <Home exact path="/" />
+            {/* <Redirect to="/home" /> */}
+          {/* </Home> */}
           <Explore path="/explore" />
           <ExploreOpensea path="/exploreOpensea" />
           <RankingRedux path="/rangking" />

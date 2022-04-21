@@ -6,8 +6,6 @@ import auth from '../../core/auth';
 import { navigate } from '@reach/router';
 import MinterFactory from '../../assets/Logos/logoMinterGris.svg';
 import MinterFactoryWhite from '../../assets/Logos/MinterFactoryWhite.svg';
-// import logo from '../../assets/Logos/logoMinterGris.svg';
-// import MinterFactoryWhite from '../../assets/Logos/MinterFactoryWhite.svg';
 import './header.css';
 import { useLocation , useHistory} from "react-router-dom";
 
@@ -33,8 +31,9 @@ const NavLink = props => (
 
 
 
-const Header = function({ className }) {
+const Header = function({ className , location : {location} }) {
   
+    //console.log(location)
     let idUrl  = useLocation();
     // const history = useHistory();
     const [logo, setLogo] = useState(MinterFactory);
@@ -144,7 +143,7 @@ const Header = function({ className }) {
     // }, [idUrl || idUrl.pathname || url]);
     useEffect(() => {
       setUrl(idUrl.pathname);
-    }, [idUrl]);
+    }, [location.path]);
 
     // console.log("el id url: ", url);
 
@@ -152,22 +151,17 @@ const Header = function({ className }) {
   //     return history.listen((location) => { 
   //        console.log(`You changed the page to: ${location.pathname}`) 
   //     }) 
-  //  },[idUrl]) 
+  //  },[idUrl]) \
+  
 
     useEffect(() => {
       console.log("exito!!!");
-      if(url !== '/mint') {
+      if(location.pathname == '/') {
           setLogo(MinterFactory);
         } else {
           setLogo(MinterFactoryWhite);
         }
-    }, [url]);
-
-    // if (idUrl.pathname === '/mint') {
-    //   console.log("es mint")
-    // } else {
-    //   console.log("no es mint")
-    // }
+    }, [location.pathname]);
 
 
     return (
