@@ -5,6 +5,35 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Placeholder from 'react-bootstrap/Placeholder';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+
+const MyDropdown = () => {
+
+  const [buttonText, setButtonText] = useState("Dropdown Button");
+
+  console.log("dom: ", document.getElementsByClassName('active'))
+
+  const changeCollection = () => {
+    setButtonText("All My NFTs")
+    setPrueba("NONONO")
+  }
+
+  return (
+    <DropdownButton
+      id="dropdown-button-dark-example2"
+      variant="secondary"
+      menuVariant="dark"
+      title={buttonText}
+      className="mt-2"
+    >
+      <Dropdown.Item href="#/action-1" active onClick={() => changeCollection()}>
+        All My NFTs
+      </Dropdown.Item>
+      <Dropdown.Item href="#/action-2">Gigaland NFTs</Dropdown.Item>
+   </DropdownButton>
+  )
+}
 
 const ImageGallery = () => {
 
@@ -40,6 +69,7 @@ const ImageGallery = () => {
   } else {
     return (
       <>
+        <MyDropdown/>
         <div className="justify-content-center">
           <div className="p-4">
             <Container>
