@@ -1,107 +1,122 @@
 import React from 'react'
-import "./addProperties.css"
 import { useState } from 'react'
-import {Row,Col,FormControl, InputGroup, Modal, Button, Card, Form, Container,CloseButton} from 'react-bootstrap'
+import {Row,Col,FormControl, InputGroup, Modal, Button, Form, Container, Card, CloseButton} from 'react-bootstrap'
 
 
-const AddProperties = (props) => {
+const AddStats = (props) => {
 
-    const [datos, setDatos] = React.useState({
-        tipo: '',
-        nombre: ''
+  const [datos, setDatos] = React.useState({
+    nombre: '',
+    valor: ''
+  });
 
-    });
-
+  
   const [saveChanges, setSaveChanges] = useState(false);
-
-  const [propiedades, setPropiedades] = useState([]);
-
-  const [clearInput, setClearInput] = useState("");
-
-    
+  const [estados, setEstados] = useState([]);
+  const [modal,setModal] = useState(true);
 
   const handleChange = (e) => {
     setDatos({
         ...datos,
         [e.target.name]: e.target.value
     })
-
-    setClearInput(e.target.value)
   }
 
   const enviarDatos = (e) => {
     e.preventDefault()
-    setPropiedades(nuevasProps => [...nuevasProps, datos])
+    setEstados(nuevosStats => [...nuevosStats, datos])
   }
 
-  
-  const mostrarProps = () => {
+  const mostrarStats = () => {
     setSaveChanges(true)
   }
 
-  // const eliminarProp = () => {
-  //   props.closeModal()
+  // const openModal = () => {
+  //   setModal(true)
+  // }
+
+  const closeModal = () => {
+    setModal(false)
+  }
+
+  
+
+  // const eliminarStat = () => {
   //   setSaveChanges(false)
   // }
 
-
   return (
     <div>
-      <br/> 
-      <br/> 
-               {
-                 props.modal ? 
 
-                 <Modal.Dialog  centered>
+
+
+          <Modal.Dialog  centered>
                     <Modal.Header>
-                      <Modal.Title>Add properties</Modal.Title>
+                      <Modal.Title>Add Stats</Modal.Title>
                     </Modal.Header>
 
                     <Modal.Body>
-                      <p>Properties show up underneath your item, are clickable, and can be filtered in your collection's sidebar.</p>
+                      <p>Numerical traits that just show as numbers.</p>
 
 
                       <Form onSubmit={enviarDatos}>
                         <Row>
                           <Col>
-                            <InputGroup.Text id="basic-addon1"><b>Type</b></InputGroup.Text>
+                          <Form.Label as="h5">Name</Form.Label>
                           </Col>
                           <Col>
-                          <InputGroup.Text id="basic-addon2"><b>Name</b></InputGroup.Text>
+                          <Form.Label as="h5">Value</Form.Label>
                           </Col>
                         </Row>
 
                         <Row>
+
+
                           <Col>
                             <FormControl
+                              type="text"
                               aria-label="Default"
                               aria-describedby="inputGroup-sizing-default"
-                              placeholder="e.g. Animal"
-                              name="tipo"
+                              placeholder="e.g. Speed"
+                              name="nombre"
                               onChange={handleChange}
-                              // value={clearInput}
                              />
-
                           </Col>
 
                           <br/>
                         
                           <Col>
                             <FormControl
+                              type="number"
                               aria-label="Default"
                               aria-describedby="inputGroup-sizing-default"
-                              placeholder="e.g. Monkey"
-                              name="nombre"
+                              placeholder="e.g. 1"
+                              name="valor"
+                              max="5"
+                              min="1"
                               onChange={handleChange}
-                              // value={clearInput}
-
                             />
+                          </Col>
+
+
+                          <Col>
+
+                          <InputGroup.Text className="mb-4">
+                            <Col>
+                              Of
+                            </Col>
+                            <Col>
+                              5
+                            </Col>
+                          </InputGroup.Text>
+                      
                           </Col>
                           
                         </Row>
 
 
                       <Row>
+
                       </Row>
 
 
@@ -111,10 +126,10 @@ const AddProperties = (props) => {
                         <Modal.Footer>
                         <Row>
                           <Col>
-                            <Button id="mintButton" className="btn-main" type='submit' onClick={mostrarProps}>Save changes</Button>
+                            <Button id="mintButton" className="btn-main" type='submit' onClick={mostrarStats}>Save changes</Button>
                           </Col>
                           <Col>
-                            <Button id="mintButton" className="btn-main" onClick={props.closeModal}>Close</Button>
+                            <Button id="mintButton" className="btn-main" onClick={props.closeStats}>Close</Button>
                           </Col>
 
                         </Row>
@@ -128,20 +143,20 @@ const AddProperties = (props) => {
 
                   </Modal.Dialog> 
 
-                  : null
-                  
-               }
-               {
-                 saveChanges ?
 
-                 
+
+
+
+                {
+
+                 saveChanges ?
+                
                  <Container>
                   <br/>
-                   <h4>Properties</h4>
+                   <h4>Stats</h4>
                    <br/>
-                                      
-
-                     {propiedades.map(c =>
+                                    
+                    {estados.map(c =>
                     <div classname="contenedorcard">
                     <Col>
                      <Card
@@ -152,11 +167,11 @@ const AddProperties = (props) => {
                       >
                      <CloseButton/>
                      <Card.Body>
-                      <Card.Title style={{ textTransform: 'uppercase' }}>Type</Card.Title>
-                      <Card.Subtitle>{c.tipo}</Card.Subtitle>
-                      <br/>
                       <Card.Title style={{ textTransform: 'uppercase' }}>Name</Card.Title>
                       <Card.Subtitle>{c.nombre}</Card.Subtitle>
+                      <br/>
+                      <Card.Title style={{ textTransform: 'uppercase' }}>Value</Card.Title>
+                      <Card.Subtitle>{c.valor}</Card.Subtitle>
                       </Card.Body>
                     </Card>
                     </Col>
@@ -170,12 +185,11 @@ const AddProperties = (props) => {
 
                }
 
-              <br/> 
-
-               
+       
+     
 
     </div>
   )
 }
 
-export default AddProperties;
+export default AddStats;

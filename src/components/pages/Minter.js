@@ -13,6 +13,8 @@ import api from "../../core/api";
 import Footer from '../components/footer';
 import {Row,Col,FormControl, InputGroup, Modal, Button,Container} from 'react-bootstrap'
 import { createGlobalStyle } from 'styled-components';
+import AddStats from "./AddStats";
+import AddLevels from "./AddLevels";
 
 
 
@@ -78,6 +80,10 @@ const Minter = (props) => {
   const [properties, setProperties] = useState([]);
   const [modal,setModal] = useState(false);
   const [addProps, setAddProps] = useState(false);
+
+
+  const [stats, setStats] = useState(false);
+  const [levels, setLevels] = useState(false);
 
 
 
@@ -211,6 +217,25 @@ const Minter = (props) => {
     setAddProps(true);
   }
 
+  const agregarStats = () => {
+    setStats(true);
+  }
+
+  const closeStats = () => {
+    setStats(false);
+    closeModal();
+  }
+
+  const agregarLevels = () => {
+    setLevels(true);
+    closeModal();
+  }
+
+  const closeLevels = () => {
+    setLevels(false);
+    closeModal();
+  }
+
 
   
   return (
@@ -253,14 +278,15 @@ const Minter = (props) => {
           {
             walletAddress.length > 0 &&
             <>
-              <button id="toggleButton" className="btn-main" onClick={() => toggleInput()}>
+              {/* <button id="toggleButton" className="btn-main" onClick={() => toggleInput()}>
                 Switch to {manualInput ? 'select' : 'manual'} input
               </button>
               <br />
-              <br />
-              {!manualInput ? (
+              <br /> */}
+
+              {/* {!manualInput ? ( */}
                 <ColumnNewMint onSelectNft={onSelectNft} showLoadMore={false} authorId="1" />
-              ) : (
+            
                 <form>
                   <h2>Image: </h2>
                   <ImageHandler setFileUrl={updateFileUrl} fileUrl={fileUrl}/>
@@ -282,7 +308,8 @@ const Minter = (props) => {
                   <hr/>
                 
                 </form>
-               )}
+               
+               {/* } */}
                
 
 
@@ -303,13 +330,13 @@ const Minter = (props) => {
                   </Col>
                   <Col xs={6} md={4}>
                     <h4>Stats </h4>
-                      <button id="mintButton" className="btn-main">
+                      <button id="mintButton" className="btn-main" onClick={agregarStats}>
                                 Add 
                       </button>
                   </Col>
                   <Col xs={6} md={4}>
                     <h4>Levels </h4>
-                      <button id="mintButton" className="btn-main">
+                      <button id="mintButton" className="btn-main" onClick={agregarLevels}>
                                 Add 
                       </button>
                   </Col>
@@ -318,10 +345,26 @@ const Minter = (props) => {
 
 
 
+              {
+                stats ? 
+
+                <AddStats agregarStats={agregarStats} closeStats={closeStats}/>
+
+                : null
+              }
+
+              {
+                levels ?
+
+                <AddLevels agregarLevels={agregarLevels} closeLevels={closeLevels}/>
+
+                : null
+              }
+
               {/* Abre modal: */}
 
               <AddProperties agregarProp={agregarProp} closeModal={closeModal} setModal={setModal} modal={modal} addProps={addProps}/>
-
+              
 
 
               <br />
@@ -345,7 +388,6 @@ const Minter = (props) => {
 
 
 
-
                <p id="status">
                  {status}
                </p>
@@ -361,4 +403,3 @@ const Minter = (props) => {
  };
  
  export default Minter;
- 

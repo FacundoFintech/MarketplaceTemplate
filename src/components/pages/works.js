@@ -48,7 +48,7 @@ return (
         <div className='row'>
           <div className="col-md-12 text-center">
               <h1>Gallery</h1>
-              <p>Anim pariatur cliche reprehenderit</p>
+              <p>View your NFT</p>
           </div>
         </div>
       </div>
