@@ -29,6 +29,11 @@ const AddLevels = (props) => {
         setSaveChanges(true)
       }
 
+  const hideCard = (e) => {
+    e.props.closeLevels()
+    setSaveChanges(false)
+  }
+
 
 
 
@@ -147,7 +152,7 @@ const AddLevels = (props) => {
           className="text-center"
           bg="light"
           >
-         <CloseButton/>
+         <CloseButton onClick={(e) => hideCard()} />
          <Card.Body>
           <Card.Title style={{ textTransform: 'uppercase' }}>Name</Card.Title>
           <Card.Subtitle>{c.nombre}</Card.Subtitle>

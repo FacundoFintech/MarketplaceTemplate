@@ -207,6 +207,8 @@ const Minter = (props) => {
 
   const openModal = () => {
     setModal(true)
+    closeStats()
+    closeLevels()
   }
 
   const closeModal = () => {
@@ -219,21 +221,22 @@ const Minter = (props) => {
 
   const agregarStats = () => {
     setStats(true);
+    closeModal();
+    closeLevels();
   }
 
   const closeStats = () => {
     setStats(false);
-    closeModal();
   }
 
   const agregarLevels = () => {
     setLevels(true);
     closeModal();
+    closeStats();
   }
 
   const closeLevels = () => {
     setLevels(false);
-    closeModal();
   }
 
 
@@ -318,7 +321,7 @@ const Minter = (props) => {
 
 
                
-               {!isEmpty() &&
+               {isEmpty() &&
               <>
               <Container>
                 <Row>
