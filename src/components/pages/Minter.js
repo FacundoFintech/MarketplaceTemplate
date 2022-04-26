@@ -266,7 +266,9 @@ const Minter = (props) => {
         </button>
         )}
         {walletAddress.length > 0 && (
-          "Connected Address: " + walletAddress
+          <button className="btn-main">
+          Connected Address: {walletAddress}
+          </button>          
         )}
         <br/><br/>
         {walletAddress.length === 0 && (
