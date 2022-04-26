@@ -16,7 +16,9 @@ import { createGlobalStyle } from 'styled-components';
 import AddStats from "./AddStats";
 import AddLevels from "./AddLevels";
 
+import MinterForm from "./MinterForm";
 
+import MinterFormList from "./MinterFormList"
 
 
 const GlobalStyles = createGlobalStyle`
@@ -83,10 +85,33 @@ const Minter = (props) => {
 
 
   const [stats, setStats] = useState(false);
+
+
   const [levels, setLevels] = useState(false);
 
+  const [showForm,setShowForm] = useState(false)
+  const [title,setTitle] = useState("")
+  const [text,setText] = useState("")
+  const [tipo,setTipo] = useState("")
+  const [listado,setListado] = useState({"properties":[],"stats":[],"levels":[]})
 
+  const [primerCampo,setPrimerCampo] = useState("")
+  const [segundoCampo,setSegundoCampo] = useState("")
 
+  const textos = {
+    "properties" : {
+      title : "Add Properties",
+      text : "Properties show up underneath your item, are clickable, and can be filtered in your collection's sidebar."
+    },
+    "stats" : {
+      title : "Add Stats",
+      text : "Numerical traits that just show as numbers."
+    },
+    "levels" : {
+      title : "Add Levels",
+      text : "Numerical traits that show as a progress bar."
+    }
+  }
 
   useEffect(() => {
     async function getExistingWallet() {
@@ -239,6 +264,19 @@ const Minter = (props) => {
     setLevels(false);
   }
 
+  const handleShowForm = (param) => {
+    setShowForm(true)
+    setTitle(textos[param].title)
+    setText(textos[param].text)
+    setTipo(param)
+    setPrimerCampo("")
+    setSegundoCampo("")
+  }
+
+  const handleDelete = (prop,key) => {
+    console.log(prop,key)
+    //setListado({...listado,})
+  }
 
   
   return (
@@ -329,46 +367,79 @@ const Minter = (props) => {
                 <Row>
                   <Col xs={6} md={4}>
                     <h4>Properties </h4>
-                      <button id="mintButton" className="btn-main" onClick={openModal}>
+                      <button id="mintButton" className="btn-main" onClick={()=>handleShowForm("properties")}>
                             Add 
                       </button>
                   </Col>
                   <Col xs={6} md={4}>
                     <h4>Stats </h4>
-                      <button id="mintButton" className="btn-main" onClick={agregarStats}>
+                      <button id="mintButton" className="btn-main" onClick={()=>handleShowForm("stats")}>
                                 Add 
                       </button>
                   </Col>
                   <Col xs={6} md={4}>
                     <h4>Levels </h4>
-                      <button id="mintButton" className="btn-main" onClick={agregarLevels}>
+                      <button id="mintButton" className="btn-main" onClick={()=>handleShowForm("levels")}>
                                 Add 
                       </button>
                   </Col>
                 </Row>
     
 
+              <MinterForm 
+                modal={showForm} 
+                title={title}
+                text={text} 
+                handleSubmit={(e)=>{
+                  e.preventDefault();
 
+                  // const [listado,setListado] = useState({"properties":[],"stats":[],"levels":[]})
+                 /* 
+                     const copia = {...listado}
+                     const arrayAModificar = copia[tipo]
+                     arrayAModificar.push({primerCampo:segundoCampo})
+                     setListado(copia)
+ */
+                  setListado({
+                    ...listado,
+                    [tipo] : [...listado[tipo],{[primerCampo]:segundoCampo}]
+                  })
 
-              {
+                  setPrimerCampo("")
+                  setSegundoCampo("")
+
+                }}
+                handleChange={(e)=>{
+                  e.target.name == "tipo" ? setPrimerCampo(e.target.value) : setSegundoCampo(e.target.value)
+                }}
+                handleClose={()=>{setShowForm(false)}}
+                propertyForm={true}
+                tipo={tipo}
+                primerCampo={primerCampo}
+                segundoCampo={segundoCampo}
+              />
+
+              <MinterFormList listado={listado} handleDelete={handleDelete}/>
+
+              {/* {
                 stats ? 
 
                 <AddStats agregarStats={agregarStats} closeStats={closeStats}/>
 
                 : null
-              }
+              } */}
 
-              {
+              {/* {
                 levels ?
 
                 <AddLevels agregarLevels={agregarLevels} closeLevels={closeLevels}/>
 
                 : null
-              }
+              } */}
 
               {/* Abre modal: */}
 
-              <AddProperties agregarProp={agregarProp} closeModal={closeModal} setModal={setModal} modal={modal} addProps={addProps}/>
+              {/* <AddProperties agregarProp={agregarProp} closeModal={closeModal} setModal={setModal} modal={modal} addProps={addProps}/> */}
               
 
 
