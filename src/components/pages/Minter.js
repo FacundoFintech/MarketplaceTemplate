@@ -178,7 +178,7 @@ const Minter = (props) => {
 
   const onMintPressed = async () => {
     setisMinting(true);
-    const { success, status } = await mintNFT(fileUrl, name, description,properties); 
+    const { success, status } = await mintNFT(fileUrl, name, description,listado); 
     setStatus(status);
     if (success) {
       setName("");
@@ -274,8 +274,10 @@ const Minter = (props) => {
   }
 
   const handleDelete = (prop,key) => {
-    console.log(prop,key)
-    //setListado({...listado,})
+    setListado({
+      ...listado,
+      [prop] : listado[prop].filter(obj=>obj[key]===undefined)
+    })
   }
 
   
@@ -361,7 +363,7 @@ const Minter = (props) => {
 
 
                
-               {isEmpty() &&
+               {!isEmpty() &&
               <>
               <Container>
                 <Row>

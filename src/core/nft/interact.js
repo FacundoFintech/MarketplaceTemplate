@@ -84,7 +84,8 @@ export const getCurrentWalletConnected = async () => {
   }
 };
 
-export const mintNFT = async (fileUrl, name, description) => {
+
+export const mintNFT = async (fileUrl, name, description, properties) => {
   if (fileUrl.trim() === "" || name.trim() === "" || description.trim() === "") {
     return {
       success: false,
@@ -97,6 +98,7 @@ export const mintNFT = async (fileUrl, name, description) => {
   metadata.name = name;
   metadata.image = fileUrl;
   metadata.description = description;
+  metadata.properties = properties;
   console.log("metadata imagen",metadata.image)
 
   const pinataResponse = await pinJSONToIPFS(metadata);
@@ -107,6 +109,7 @@ export const mintNFT = async (fileUrl, name, description) => {
     };
   }
   const tokenURI = pinataResponse.pinataUrl;
+  console.log("el tokenURI: ",tokenURI)
 
   window.contract = await new web3.eth.Contract(contractABI, contractAddress);
 

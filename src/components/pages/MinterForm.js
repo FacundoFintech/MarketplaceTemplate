@@ -21,7 +21,7 @@ const MinterForm = ({modal,title,text,tipo,primerCampo,segundoCampo,handleSubmit
                   </Col>
                 </Row>
                 <Row>
-                  <Col>
+                  <Col xs="6">
                     <FormControl
                       aria-label="Default"
                       aria-describedby="inputGroup-sizing-default"
@@ -32,17 +32,26 @@ const MinterForm = ({modal,title,text,tipo,primerCampo,segundoCampo,handleSubmit
                     />
                   </Col>
                   <br />
-                  <Col>
-                    <FormControl
+                  <Col xs={tipo=="properties"?"6":"3"}>
+                    {tipo == "properties" ? <FormControl
                       aria-label="Default"
                       aria-describedby="inputGroup-sizing-default"
                       placeholder="e.g. Monkey"
                       name="nombre"
                       onChange={handleChange}
                       value={segundoCampo}
-                    />
-                  </Col>
-                  {tipo!="properties"&&<Col>
+                    /> : <FormControl
+                    type="number"
+                    aria-label="Default"
+                    aria-describedby="inputGroup-sizing-default"
+                    placeholder="e.g. 1"
+                    name="valor"
+                    max="5"
+                    min="1"
+                    onChange={handleChange}
+                  />}
+                  </Col >
+                  {tipo!="properties"&&<Col xs="3">
                     <InputGroup.Text className="mb-4">
                       <Col>Of</Col>
                       <Col>5</Col>

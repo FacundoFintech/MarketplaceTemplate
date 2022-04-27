@@ -14,7 +14,7 @@ const MinterFormList = ({ listado , handleDelete }) => {
             <div classname="contenedorcard">
               {listado[prop].map(item => {
                 //Object.keys(item)//[0]
-                return Object.keys(item).map(primerTexto=>{
+                return Object.keys(item).map(key=>{
                   return (
                     <Col>
                       <Card
@@ -23,13 +23,13 @@ const MinterFormList = ({ listado , handleDelete }) => {
                         className="text-center"
                         bg="light"
                       >
-                        <CloseButton onClick={()=>handleDelete(prop,primerTexto)}/>
+                        <CloseButton onClick={()=>handleDelete(prop,key)}/>
                         <Card.Body>
                           <Card.Title style={{ textTransform: 'uppercase' }}>{prop=="properties"?"TYPE":"NAME"}</Card.Title>
-                          <Card.Subtitle>{primerTexto}</Card.Subtitle>
+                          <Card.Subtitle>{key}</Card.Subtitle>
                           <br />
                           <Card.Title style={{ textTransform: 'uppercase' }}>{prop=="properties"?"NAME":"VALUE"}</Card.Title>
-                          <Card.Subtitle>{item[primerTexto]}</Card.Subtitle>
+                          <Card.Subtitle>{item[key]}</Card.Subtitle>
                         </Card.Body>
                       </Card>
                     </Col>
